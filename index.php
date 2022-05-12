@@ -1,4 +1,13 @@
 <?php
+// Replace this with a string with your backend's URL
+// Example: "https://api.example.com/"
+$backend  = $_ENV["backend"];
+// The name of your website
+// This will appear on your root directory
+$name     = "á.cf";
+
+
+
 /* vurltool 1.0 */
 $vrl = $_SERVER["REQUEST_URI"];
 $vrl = preg_replace("/#(.*)$/", "", $vrl);
@@ -9,10 +18,10 @@ $vi = implode("/", $v);
 $v = explode("/", $vi);
 
 if ($vi == "") {
-  die("á.cf");
+  die($name);
 } else {
   //die($vi);
-  $info = json_decode(file_get_contents("https://[backend]/api.php?root=" . $vi)); // Replace the [backend] with your backend
+  $info = json_decode(file_get_contents($backend . "/api.php?root=" . $vi)); // Replace the [backend] with your backend
   if ($info->{"error"} == true) {
     http_response_code(404);
     die("Not found");
